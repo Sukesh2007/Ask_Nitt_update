@@ -5,17 +5,17 @@ import { Question, User, Vote } from './models/User.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import cors from 'cors';
+import { GoogleGenAI } from "@google/genai";
 
 
-
-
+const ai = new GoogleGenAI({});
 
 const app = express()
 
 
 let Rno = ""
 //const PORT = 4004
-const PORT = process.env.PORT || 4004;
+const PORT = process.env.PORT||4005;
 
 await connectDb()
 
@@ -72,6 +72,19 @@ app.put("/login" , async(req,res) => {
     
     
     
+})
+app.post("/askai" , async(req,res) => {
+    const { prompt } = req.body
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+            {
+                role: "user",
+                content: prompt
+            }
+        ]
+    })
+    res.json({ success: true, response:response.text })
 })
 
 app.get('/dashboard' , authenticatetoken , (req,res) => {
