@@ -5,12 +5,13 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [],git 
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "description": "",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
